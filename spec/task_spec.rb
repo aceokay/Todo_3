@@ -24,4 +24,12 @@ describe(Task) do
       expect(task1).to(eq(task2))
     end
   end
+
+  describe("#save") do
+    it("adds a task to the array of saved tasks") do
+    test_track = Task.new({:description => "learn SQL"})
+    test_track.save()
+    expect(Task.all()).to(eq([test_track]))
+    end
+  end
 end
