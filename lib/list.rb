@@ -19,6 +19,7 @@ class List
 
   define_method(:save) do
     result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
+    # sort = DB.exec("SELECT description, due_date FROM tasks ORDER BY due_date;")
     @id = result.first().fetch('id').to_i()
   end
 

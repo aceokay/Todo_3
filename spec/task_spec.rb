@@ -46,4 +46,14 @@ describe(Task) do
     expect(Task.all()).to(eq([test_track]))
     end
   end
+
+  # describe("#sort") do
+  #   it('sorts table by due date') do
+  #     test_task = Task.new({:description => "COOL", :list_id => 1, :due_date => '2017-01-01'})
+  #     test_task.save()
+  #     test_task2 = Task.new({:description => "COO0L", :list_id => 1, :due_date => '2016-01-01'})
+  #     test_task2.save()
+  #     expect(Task.all().sort().to(eq([test_task2, test_task])))
+  #   end
+  # end
 end

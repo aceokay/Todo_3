@@ -5,6 +5,7 @@ class Task
   def initialize(attributes)
     @description = attributes.fetch(:description)
     @list_id = attributes.fetch(:list_id)
+    # @due_date = attributes.fetch(:due_date)
   end
 
   define_singleton_method(:all) do
@@ -24,5 +25,16 @@ class Task
 
   define_method(:save) do
     DB.exec("INSERT INTO tasks (description,list_id) VALUES ('#{@description}',#{@list_id});")
+  end
+
+  def sort
+    DB.exec("SELECT * FROM tasks ORDER BY due_date;")
+    tasks = []
+    returned_tasks.each() do |task|
+      description = task.fetch("description")
+      list_id = task.fetch("list_id").to_i()
+      tasks.push(Task.new({:description => description,:list_id => list_id}))
+    end
+    tasks
   end
 end #end of class
