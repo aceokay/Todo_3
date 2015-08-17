@@ -34,7 +34,7 @@ describe(Task) do
   describe("#==") do
     it("is the same task if it has the same description") do
       task1 = Task.new({:description => "learn SQL", :list_id => 1})
-      task2 = Task.new({:description => "learn SQL", :list_id => 1})
+      task2 = Task.new({:description => "learn SQL", :list_id => 2})
       expect(task1).to(eq(task2))
     end
   end
@@ -47,13 +47,13 @@ describe(Task) do
     end
   end
 
-  # describe("#sort") do
-  #   it('sorts table by due date') do
-  #     test_task = Task.new({:description => "COOL", :list_id => 1, :due_date => '2017-01-01'})
-  #     test_task.save()
-  #     test_task2 = Task.new({:description => "COO0L", :list_id => 1, :due_date => '2016-01-01'})
-  #     test_task2.save()
-  #     expect(Task.all().sort().to(eq([test_task2, test_task])))
-  #   end
-  # end
+  describe("#sort") do
+    it('sorts table by due date') do
+      task1 = Task.new({:description => "COOL", :list_id => 1, :due_date => '2017-01-01'})
+      task1.save()
+      task2 = Task.new({:description => "COO0L", :list_id => 2, :due_date => '2016-01-01'})
+      task2.save()
+      expect(Task.all().sort()).to(eq([task2, task1]))
+    end
+  end
 end

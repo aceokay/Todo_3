@@ -1,6 +1,7 @@
 class Task
 
   attr_reader(:description, :list_id)
+  tasks = []
 
   def initialize(attributes)
     @description = attributes.fetch(:description)
@@ -29,12 +30,5 @@ class Task
 
   def sort
     DB.exec("SELECT * FROM tasks ORDER BY due_date;")
-    tasks = []
-    returned_tasks.each() do |task|
-      description = task.fetch("description")
-      list_id = task.fetch("list_id").to_i()
-      tasks.push(Task.new({:description => description,:list_id => list_id}))
-    end
-    tasks
   end
 end #end of class
