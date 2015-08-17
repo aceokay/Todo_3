@@ -10,8 +10,12 @@ RSpec.configure do |config|
 end
 
 describe(Task) do
-  #
-  # describe(".all") do
+
+  describe(".all") do
+    it('is empty at first') do
+      expect(Task.all()).to(eq([]))
+    end
+  end
 
   describe("#==") do
     it("is the same task if it has the same description") do
