@@ -11,14 +11,20 @@ class List
     lists = []
     returned_lists.each() do |list|
       name = list.fetch('name')
-      id = list.fetch('id')
+      id = list.fetch('id').to_i()
       lists.push(List.new({:name => name, :id => id}))
     end
     lists
   end
 
+  define_method(:save) do
+    result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch('id').to_i()
+  end
 
-
+  define_method(:==) do |another_list|
+    self.name().==(another_list.name()).&(self.id().==(another_list.id()))
+  end
 
 
 end #end of class
