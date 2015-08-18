@@ -50,4 +50,14 @@ describe(List) do
     end
   end
 
+  describe("#tasks") do
+    it("lets you find all tasks for a given list") do
+      list = List.new({:name =>"Epicodus Work",:id => nil})
+      list.save()
+      task = Task.new({:description => 'Rock Out', :list_id => list.id(), :due_date => Date.new(2015,1,2)})
+      task.save()
+      expect(list.tasks()).to(eq([task]))
+    end
+  end
+
 end

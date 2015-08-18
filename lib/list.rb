@@ -38,4 +38,16 @@ class List
     found_list
   end
 
+  define_method(:tasks) do
+    returned_tasks = DB.exec("SELECT * FROM tasks WHERE list_id = #{@id};")
+    tasks = []
+    returned_tasks.each() do |task|
+      description = task.fetch('description')
+      list_id = task.fetch('list_id').to_i()
+      due_date = Date.parse(task.fetch('due_date'))
+      tasks.push(Task.new({:description => description, :list_id => list_id, :due_date => due_date}))
+    end
+    tasks
+  end
+
 end #end of class

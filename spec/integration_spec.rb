@@ -34,11 +34,19 @@ describe('to do app',{:type => :feature}) do
       click_link(list.name)
       expect(page).to have_content(list.name())
     end
-    it('allows the users to view tasks in a specific list') do
+    it('greets the users with a message if list has no tasks') do
       list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
       list.save()
       visit("/lists/#{list.id}")
       expect(page).to have_content("You have no tasks in this list")
+    end
+    it('allows the users to view tasks in a specific list') do
+      list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
+      list.save()
+      task = Task.new({:description => 'Rock Out', :list_id => list.id(), :due_date => Date.new(2015,1,2)})
+      task.save()
+      visit("/lists/#{list.id}")
+      expect(page).to have_content(task.description())
     end
   end
 
