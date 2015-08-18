@@ -47,11 +47,12 @@ describe(Task) do
 
   describe("#sort") do
     it('sorts table by due date') do
-      task1 = Task.new({:description => "COOL", :list_id => 1, :due_date => Date.new(2017,1,1)})
+      list_id = 1
+      task1 = Task.new({:description => "COOL", :list_id => list_id, :due_date => Date.new(2017,1,1)})
       task1.save()
-      task2 = Task.new({:description => "COO0L", :list_id => 2, :due_date => Date.new(2016,1,1)})
+      task2 = Task.new({:description => "COO0L", :list_id => list_id, :due_date => Date.new(2016,1,1)})
       task2.save()
-      expect(Task.sort()).to(eq([task2, task1]))
+      expect(Task.sort(list_id)).to(eq([task2, task1]))
     end
   end
 end

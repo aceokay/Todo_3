@@ -34,12 +34,14 @@ describe('to do app',{:type => :feature}) do
       click_link(list.name)
       expect(page).to have_content(list.name())
     end
+
     it('greets the users with a message if list has no tasks') do
       list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
       list.save()
       visit("/lists/#{list.id}")
       expect(page).to have_content("You have no tasks in this list")
     end
+
     it('allows the users to view tasks in a specific list') do
       list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
       list.save()
@@ -48,6 +50,7 @@ describe('to do app',{:type => :feature}) do
       visit("/lists/#{list.id}")
       expect(page).to have_content(task.description())
     end
+
     it('allows the user to add a task to a specific list') do
       list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
       list.save()
@@ -58,12 +61,25 @@ describe('to do app',{:type => :feature}) do
       expect(page).to have_content('Do the dishes')
       expect(page).to have_content('2016-02-03')
     end
+
     it('allows the user to click on a link to get back to index page') do
       list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
       list.save()
       visit("/lists/#{list.id}")
       click_link('Go Back to the Home Page')
       expect(page).to have_content('Welcome to Your Incroyable To Do Application!')
+    end
+
+    it('sorts the tasks by due date') do
+      list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
+      list.save()
+      task1 = Task.new({:description => 'Roll Out', :list_id => list.id(), :due_date => Date.new(2016,1,2)})
+      task2 = Task.new({:description => 'Rock Out', :list_id => list.id(), :due_date => Date.new(2016,1,1)})
+      task1.save()
+      task2.save()
+      visit("/lists/#{list.id}")
+      expect(page).to have_selector("ul#task_list li:nth-child(1)", text: 'Rock Out, 2016-01-01')
+      expect(page).to have_selector("ul#task_list li:nth-child(2)", text: 'Roll Out, 2016-01-02')
     end
   end
 
