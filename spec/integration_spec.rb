@@ -58,6 +58,13 @@ describe('to do app',{:type => :feature}) do
       expect(page).to have_content('Do the dishes')
       expect(page).to have_content('2016-02-03')
     end
+    it('allows the user to click on a link to get back to index page') do
+      list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
+      list.save()
+      visit("/lists/#{list.id}")
+      click_link('Go Back to the Home Page')
+      expect(page).to have_content('Welcome to Your Incroyable To Do Application!')
+    end
   end
 
 
