@@ -28,11 +28,11 @@ describe('to do app',{:type => :feature}) do
 
   describe('view a specific list') do
     it('allows the users to click on a specific list and view the details associated to it') do
-    list = List.new({:name => 'Test List', :id => nil})
-    list.save()
-    visit('/lists')
-    click_link(list.name)
-    expect(page).to have_content(list.name())
+      list = List.new({:name => 'Test List', :id => nil})
+      list.save()
+      visit('/lists')
+      click_link(list.name)
+      expect(page).to have_content(list.name())
     end
   end
 

@@ -22,13 +22,13 @@ post('/lists') do
   erb(:success)
 end
 
-get('/lists/') do
+get('/lists') do
   @lists = List.all()
   erb(:lists)
 end
 
 get('/lists/:id') do
-  id = params.fetch("id")
+  id = params.fetch("id").to_i()
   @list = List.find(id)
   erb(:list)
-end   
+end
