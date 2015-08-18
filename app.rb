@@ -32,3 +32,13 @@ get('/lists/:id') do
   @list = List.find(id)
   erb(:list)
 end
+
+post('/lists/:id') do
+  id = params.fetch("id").to_i()
+  description = params.fetch("description")
+  due_date = params.fetch("due_date")
+  task = Task.new({:description => description, :list_id => id, :due_date => due_date})
+  task.save()
+  @list = List.find(id)
+  erb(:list)
+end

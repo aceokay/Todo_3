@@ -48,6 +48,16 @@ describe('to do app',{:type => :feature}) do
       visit("/lists/#{list.id}")
       expect(page).to have_content(task.description())
     end
+    it('allows the user to add a task to a specific list') do
+      list = List.new({:name => 'Bon Giovis List of Things', :id => nil})
+      list.save()
+      visit("/lists/#{list.id}")
+      fill_in('description',:with => 'Do the dishes')
+      fill_in('due_date', :with => Date.parse('2016-02-03'))
+      click_button('Add Task')
+      expect(page).to have_content('Do the dishes')
+      expect(page).to have_content('2016-02-03')
+    end
   end
 
 

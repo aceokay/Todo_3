@@ -7,5 +7,15 @@
       <%=task.due_date() %>
   <% end %>
 <% else %>
-  <p>"You have no tasks in this list!"</p>
+  <p>You have no tasks in this list!</p>
 <% end %>
+
+<form action="/lists/<%= @list.id() %>" method="post">
+  <div class="form-group">
+    <label for="description"> Description: </label>
+    <input type="text" name="description" id="description" class="form-control">
+    <label for="due_date"> Due Date: </label>
+    <input type="date" name="due_date" id="due_date" class="form-control">
+  </div>
+  <button name="button" class="btn" type="submit"> Add Task </button>
+</form>
