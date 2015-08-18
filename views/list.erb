@@ -1,0 +1,11 @@
+<h1>Welcome to <%= @list.name %></h1>
+
+<% if @list.tasks().any?() %>
+  <h3>Here are your tasks:</h3>
+  <% @list.tasks().each() do |task| %>
+      <%=task.description() %>
+      <%=task.due_date() %>
+  <% end %>
+<% else %>
+  <p>"You have no tasks in this list!"</p>
+<% end %>
