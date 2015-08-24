@@ -30,7 +30,8 @@ end
 
 get('/lists/:id') do
   id = params.fetch("id").to_i()
-  @list = List.find(id)
+  list = List.find(id)
+  @sorted_tasks = Task.sort(list.id())
   erb(:list)
 end
 
@@ -40,7 +41,8 @@ post('/lists/:id') do
   due_date = params.fetch("due_date")
   task = Task.new({:description => description, :list_id => id, :due_date => due_date})
   task.save()
-  @list = List.find(id)
+  list = List.find(id)
+  @sorted_tasks = Task.sort(list.id())
   erb(:list)
 end
 
@@ -54,5 +56,5 @@ patch("/tasks/:id") do
   @task = Task.find(params.fetch("id").to_i())
   @task.update({:description => description})
   @tasks = Task.all()
-  erb(:task_edit) 
+  erb(:task_edit)
 end

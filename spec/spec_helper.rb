@@ -10,8 +10,9 @@ require('date')
 
 
 RSpec.configure do |config|
-  config.before(:each) do
-    DB.exec("DELETE FROM lists *;")
-    DB.exec("DELETE FROM tasks *;")
+  config.after(:each) do
+    Task.all().each() do |task|
+      task.destroy()
+    end
   end
 end
