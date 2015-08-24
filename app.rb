@@ -45,6 +45,16 @@ post('/lists/:id') do
   erb(:list)
 end
 
+get("/tasks/:id/finish") do
+  task_id = params.fetch('id').to_i()
+  task = Task.find(task_id)
+  task.update({:done => true})
+  list_id = task.list_id()
+  @list = List.find(list_id)
+  @tasks = @list.tasks.not_done()
+  erb(:list)
+end
+
 get('/tasks/:id/edit') do
   @task = Task.find(params.fetch("id").to_i())
   erb(:task_edit)
