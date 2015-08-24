@@ -1,3 +1,5 @@
+ENV['RACK_ENV'] = 'test'
+
 require("rspec")
 require("pg")
 require("list")
@@ -5,7 +7,7 @@ require("task")
 require('pry')
 require('date')
 
-DB = PG.connect({:dbname => "to_do_test"})
+
 
 RSpec.configure do |config|
   config.before(:each) do
