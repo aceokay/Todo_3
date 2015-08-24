@@ -5,7 +5,7 @@
   <h3>Here are your tasks:</h3>
     <ul id="task_list">
       <% sorted_tasks.each() do |task| %>
-        <li><%=task.description() %>, <%=task.due_date() %></li>
+        <li><a href="/tasks/<%=task.id() %>/edit"> Update this tasks's description <%=task.description() %>, <%=task.due_date() %></a></li>
       <% end %>
    </ul>
 <% else %>
