@@ -1,10 +1,10 @@
-<h1>Welcome to <%= @list.name %></h1>
+<h1>Welcome to <%= @list.name() %></h1>
 
 
-<% if @sorted_tasks.any?() %>
+<% if @tasks.any?() %>
   <h3>Here are your tasks:</h3>
     <ul id="task_list">
-      <% @sorted_tasks.not_done().each() do |task| %>
+      <% @tasks.each() do |task| %>
         <li><a href="/tasks/<%=task.id() %>/edit"> Update this tasks's description <%=task.description() %>, <%=task.due_date() %></a></li>
       <% end %>
    </ul>
